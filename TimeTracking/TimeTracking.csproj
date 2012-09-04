@@ -41,7 +41,7 @@
   <ItemGroup>
     <Compile Include="Commands\StartWork.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="WorkEntry.cs" />
+    <Compile Include="WorkProgress.cs" />
     <Compile Include="WorkTrackingProcessManager.cs" />
   </ItemGroup>
   <ItemGroup>
