@@ -44,6 +44,12 @@
     <Compile Include="WorkEntry.cs" />
     <Compile Include="WorkTrackingProcessManager.cs" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Cqrs\Cqrs.csproj">
+      <Project>{8971B0E6-FA30-4227-A53B-513BBA8D76CF}</Project>
+      <Name>Cqrs</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
