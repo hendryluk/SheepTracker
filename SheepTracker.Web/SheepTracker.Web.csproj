@@ -163,6 +163,9 @@
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Scripts\app\main.js" />
+    <Content Include="Scripts\app\run.js" />
+    <Content Include="Scripts\app\templates\WorkItemListWidget.html" />
+    <Content Include="Scripts\app\WorkItemListWidget.js" />
     <Content Include="Scripts\dijit\a11y.js" />
     <Content Include="Scripts\dijit\a11yclick.js" />
     <Content Include="Scripts\dijit\BackgroundIframe.js" />
