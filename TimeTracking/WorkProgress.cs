@@ -6,13 +6,15 @@ namespace TimeTracking
 {
     public class WorkProgress: EventSourced
     {
+        private Guid _workId;
         private DateTime _startedTime;
         private TimeSpan? _adjustment;
 
-        public WorkProgress(Guid id, DateTime startedTime) : this(id)
+        public WorkProgress(Guid id, Guid workId, DateTime startedTime) : this(id)
         {
             Update(new Started
                        {
+                           WorkId = workId,
                            SourceId = id,
                            StartedTime = startedTime
                        });
@@ -22,6 +24,12 @@ namespace TimeTracking
         {
             Handles<Started>(OnStarted);
             Handles<Stopped>(OnStopped);
+            Handles<ChangedDurationSoFar>(OnChangedDurationSoFar);
+        }
+
+        private void OnChangedDurationSoFar(ChangedDurationSoFar ev)
+        {
+            
         }
 
         private void OnStopped(Stopped ev)
@@ -46,6 +54,7 @@ namespace TimeTracking
         public class Started: VersionedEvent
         {
             public DateTime StartedTime { get; set; }
+            public Guid WorkId { get; set; }
         }
 
         public class Stopped: VersionedEvent
@@ -54,7 +63,7 @@ namespace TimeTracking
             public TimeSpan? OverrideDuration { get; set; }
         }
 
-        public class ChangedDurationSoFar
+        public class ChangedDurationSoFar: VersionedEvent
         {
             public DateTime ChangedAt { get; set; }
             public TimeSpan Duration { get; set; }
