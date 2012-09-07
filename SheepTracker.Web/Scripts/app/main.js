@@ -26,10 +26,7 @@ define(['dojo/has', 'require'], function (has, require) {
 	 * require different functionality (i.e. client/server or desktop/tablet/phone).
 	 */
     if (has('host-browser')) {
-        require(['dojo/parser', './WorkItemListWidget', 'dojo/domReady!'],
-            function (parser) {
-                parser.parse();
-        });
+        require(['dojo/parser', './DashboardWidget', 'dojo/domReady!']);
     }
     else {
         // TODO: Eventually, the Boilerplate will actually have a useful server implementation here :)

@@ -15,7 +15,7 @@
     <AssemblyName>SheepTracker.Web</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <MvcBuildViews>false</MvcBuildViews>
-    <UseIISExpress>true</UseIISExpress>
+    <UseIISExpress>false</UseIISExpress>
     <IISExpressSSLPort />
     <IISExpressAnonymousAuthentication />
     <IISExpressWindowsAuthentication />
@@ -162,10 +162,44 @@
     <Content Include="Content\themes\base\jquery.ui.theme.css" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
+    <Content Include="RxJS-redist.txt" />
     <Content Include="Scripts\app\main.js" />
     <Content Include="Scripts\app\run.js" />
+    <Content Include="Scripts\app\DashboardWidget.js" />
+    <Content Include="Scripts\app\templates\DashboardWidget.html" />
     <Content Include="Scripts\app\templates\WorkItemListWidget.html" />
     <Content Include="Scripts\app\WorkItemListWidget.js" />
+    <Content Include="Scripts\bootstrap\Alert.js" />
+    <Content Include="Scripts\bootstrap\app.profile.js" />
+    <Content Include="Scripts\bootstrap\Button.js" />
+    <Content Include="Scripts\bootstrap\Carousel.js" />
+    <Content Include="Scripts\bootstrap\Collapse.js" />
+    <Content Include="Scripts\bootstrap\Datepicker.js" />
+    <Content Include="Scripts\bootstrap\Dropdown.js" />
+    <Content Include="Scripts\bootstrap\main.js" />
+    <Content Include="Scripts\bootstrap\Modal.js" />
+    <Content Include="Scripts\bootstrap\Popover.js" />
+    <Content Include="Scripts\bootstrap\run.js" />
+    <Content Include="Scripts\bootstrap\Scrollspy.js" />
+    <Content Include="Scripts\bootstrap\Support.js" />
+    <Content Include="Scripts\bootstrap\Tab.js" />
+    <Content Include="Scripts\bootstrap\tests\alert.js" />
+    <Content Include="Scripts\bootstrap\tests\button.js" />
+    <Content Include="Scripts\bootstrap\tests\carousel.js" />
+    <Content Include="Scripts\bootstrap\tests\collapse.js" />
+    <Content Include="Scripts\bootstrap\tests\complete.js" />
+    <Content Include="Scripts\bootstrap\tests\dropdown.js" />
+    <Content Include="Scripts\bootstrap\tests\functions.js" />
+    <Content Include="Scripts\bootstrap\tests\modal.js" />
+    <Content Include="Scripts\bootstrap\tests\popover.js" />
+    <Content Include="Scripts\bootstrap\tests\runTests.html" />
+    <Content Include="Scripts\bootstrap\tests\scrollspy.js" />
+    <Content Include="Scripts\bootstrap\tests\support.js" />
+    <Content Include="Scripts\bootstrap\tests\tab.js" />
+    <Content Include="Scripts\bootstrap\tests\tooltip.js" />
+    <Content Include="Scripts\bootstrap\tests\typeahead.js" />
+    <Content Include="Scripts\bootstrap\Tooltip.js" />
+    <Content Include="Scripts\bootstrap\Typeahead.js" />
     <Content Include="Scripts\dijit\a11y.js" />
     <Content Include="Scripts\dijit\a11yclick.js" />
     <Content Include="Scripts\dijit\BackgroundIframe.js" />
@@ -9047,6 +9081,7 @@
     <Content Include="Scripts\dojox\analytics\README" />
     <Content Include="Scripts\dojox\analytics\logger\JSON.php" />
     <Content Include="Scripts\dojox\analytics\logger\dojoxAnalytics.php" />
+    <Content Include="Scripts\bootstrap\package.json" />
     <None Include="Scripts\jquery-1.6.2-vsdoc.js" />
     <Content Include="Scripts\dojo\tests\touch.js" />
     <Content Include="Scripts\dojo\tests\uacss.js" />
@@ -9094,6 +9129,23 @@
     <Content Include="Scripts\knockout-2.0.0.debug.js" />
     <Content Include="Scripts\knockout-2.0.0.js" />
     <Content Include="Scripts\modernizr-2.0.6-development-only.js" />
+    <None Include="Scripts\rx-vsdoc.js" />
+    <None Include="Scripts\rx.aggregates-vsdoc.js" />
+    <Content Include="Scripts\rx.aggregates.min.js" />
+    <None Include="Scripts\rx.coincidence-vsdoc.js" />
+    <Content Include="Scripts\rx.coincidence.min.js" />
+    <None Include="Scripts\rx.joinpatterns-vsdoc.js" />
+    <Content Include="Scripts\rx.joinpatterns.min.js" />
+    <Content Include="Scripts\rx.min.js" />
+    <None Include="Scripts\rx.time-vsdoc.js" />
+    <None Include="Scripts\rx.testing-vsdoc.js" />
+    <Content Include="Scripts\rx.testing.min.js" />
+    <Content Include="Scripts\rx.time.min.js" />
+    <Content Include="Scripts\rxdojo\AsyncSubject.js" />
+    <Content Include="Scripts\rxdojo\io.js" />
+    <Content Include="Scripts\rxdojo\main.js" />
+    <Content Include="Scripts\rxdojo\Observable.js" />
+    <Content Include="Scripts\rxdojo\xhr.js" />
     <Content Include="Scripts\util\buildscripts\build.js" />
     <Content Include="Scripts\util\buildscripts\build_notice.txt" />
     <Content Include="Scripts\util\buildscripts\cdnBuild.txt" />
@@ -9492,10 +9544,10 @@
       <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
         <WebProjectProperties>
           <UseIIS>True</UseIIS>
-          <AutoAssignPort>True</AutoAssignPort>
+          <AutoAssignPort>False</AutoAssignPort>
           <DevelopmentServerPort>54162</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost:53634/</IISUrl>
+          <IISUrl>http://localhost/SheepTracker</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>
