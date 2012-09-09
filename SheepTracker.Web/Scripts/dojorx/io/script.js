@@ -1,5 +1,5 @@
-﻿define(['dojo/io.script', './AsyncSubject'], function(io, AsyncSubject) {
-    return declare([io], {
+﻿define(['dojo/io/script', '../AsyncSubject'], function(script, AsyncSubject) {
+    return declare([script], {
         getAsObservable: function (args) {
             var subject = new AsyncSubject();
             args.load = function (data) {
@@ -9,7 +9,7 @@
             args.error = function (error) {
                 subject.onError(error);
             };
-            dojo.io.script.get(args);
+            script.get(args);
             return subject;
         }
     });

@@ -202,8 +202,8 @@ var _TextBoxMixin = declare("dijit.form._TextBoxMixin", null, {
 	onInput: function(){},
 
 	__skipInputEvent: false,
-	_onInput: function(/*Event*/ evt){
-		// summary:
+	_onInput: function (/*Event*/ evt) {
+	    // summary:
 		//		Called AFTER the input event has happened
 
 		// set text direction according to textDir that was defined in creation

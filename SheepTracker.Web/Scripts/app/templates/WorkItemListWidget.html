@@ -1,3 +1,11 @@
 ﻿<div>
-    <input type="text"/>
+<script type="dojo/require">at: "dojox/mvc/at"</script>
+    <div data-dojo-type="dojox.mvc.Group" data-dojo-props="ref: this.model">
+        <input type="text" data-dojo-type="dijit.form.TextBox" data-dojo-attach-point="txSearch" data-dojo-props="ref: 'searchTerms', intermediateChanges:true" />
+        <div data-dojo-type="dojox.mvc.Repeat" data-dojo-props="ref: 'searchResults', exprchar: '#'">
+            <div data-dojo-type="dojox.mvc.Group" data-dojo-props="ref: '#{this.index}'">
+                <span data-dojo-type="dojox.mvc.Output" data-dojo-props="ref: 'a'"></span>    
+            </div>
+        </div>
+    </div>
 </div>

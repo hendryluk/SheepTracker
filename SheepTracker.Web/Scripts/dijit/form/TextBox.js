@@ -61,8 +61,8 @@ define([
 		},
 
 		_onInput: function(e){
-			this.inherited(arguments);
-			if(this.intermediateChanges){ // _TextBoxMixin uses onInput
+		    this.inherited(arguments);
+		    if(this.intermediateChanges){ // _TextBoxMixin uses onInput
 				// allow the key to post to the widget input box
 				this.defer(function(){ this._handleOnChange(this.get('value'), false); });
 			}
