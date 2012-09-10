@@ -168,7 +168,9 @@
     <Content Include="Scripts\app\run.js" />
     <Content Include="Scripts\app\DashboardWidget.js" />
     <Content Include="Scripts\app\templates\DashboardWidget.html" />
+    <Content Include="Scripts\app\templates\WorkItemListItemWidget.html" />
     <Content Include="Scripts\app\templates\WorkItemListWidget.html" />
+    <Content Include="Scripts\app\WorkItemListItemWidget.js" />
     <Content Include="Scripts\app\WorkItemListWidget.js" />
     <Content Include="Scripts\bootstrap\Alert.js" />
     <Content Include="Scripts\bootstrap\app.profile.js" />

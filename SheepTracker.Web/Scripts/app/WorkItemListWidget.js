@@ -1,10 +1,10 @@
 ﻿define(['dojo/_base/declare', 'dijit/_WidgetBase', 'dijit/_TemplatedMixin', 'dijit/_WidgetsInTemplateMixin', 'dojo/text!./templates/WorkItemListWidget.html',
-        'dojorx/Observable', 'dojox/mvc', 'dojox/rpc/Rest', 'dojorx',
-        'dojox/mvc/Group', 'dijit/form/TextBox', 'dojox/mvc/Output', 'dojox/mvc/Repeat', 'dojox/mvc/at'],
+        'dojox/mvc', 'dojox/rpc/Rest', 'dojorx',
+        'dojox/mvc/Group', 'dijit/form/TextBox', 'dojox/mvc/Output', 'dojox/mvc/Repeat', 'dojox/mvc/at', './WorkItemListItemWidget'],
     function (declare, _WidgetBase, _TemplatedMixin, _WidgetsInTemplateMixin, template,
-        Observable, mvc, Rest, rx) {
+        mvc, Rest, rx) {
         
-        return declare([_WidgetBase, _TemplatedMixin, _WidgetsInTemplateMixin], {
+        return declare("app.WorkItemListWidget", [_WidgetBase, _TemplatedMixin, _WidgetsInTemplateMixin], {
             templateString: template,
             constructor: function () {
                 this.model = mvc.getStateful({ searchResults: [], searchTerms: "123" });
@@ -24,7 +24,7 @@
                     })
                     .switchLatest()
                     .subscribe(dojo.hitch(this, function (data) {
-                        this.model.set("searchResults", mvc.getStateful(data));
+                        this.model.set("searchResults", data);
                     }));
             }
         });
