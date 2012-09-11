@@ -39,6 +39,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="dotless.Core, Version=1.3.0.5, Culture=neutral, PublicKeyToken=96b446c9e63eae34, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\dotless.1.3.0.5\lib\dotless.Core.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -124,6 +128,8 @@
   <ItemGroup>
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
+    <Compile Include="Bundling\ImportedFilePathResolver.cs" />
+    <Compile Include="Bundling\DotlessTransform.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
@@ -168,7 +174,6 @@
     <Content Include="Scripts\app\main.js" />
     <Content Include="Scripts\app\run.js" />
     <Content Include="Scripts\app\DashboardWidget.js" />
-    <Content Include="Content\themes\app\WorkItemList.css" />
     <Content Include="Scripts\app\templates\DashboardWidget.html" />
     <Content Include="Scripts\app\templates\WorkItemListItemWidget.html" />
     <Content Include="Scripts\app\templates\WorkItemListWidget.html" />
@@ -9087,6 +9092,8 @@
     <Content Include="Scripts\dojox\analytics\logger\JSON.php" />
     <Content Include="Scripts\dojox\analytics\logger\dojoxAnalytics.php" />
     <Content Include="Scripts\bootstrap\package.json" />
+    <Content Include="Content\themes\app\WorkItemList.less" />
+    <Content Include="Content\themes\app\variables.less" />
     <None Include="Scripts\jquery-1.6.2-vsdoc.js" />
     <Content Include="Scripts\dojo\tests\touch.js" />
     <Content Include="Scripts\dojo\tests\uacss.js" />

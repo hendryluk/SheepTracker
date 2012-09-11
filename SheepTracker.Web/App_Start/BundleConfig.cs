@@ -1,19 +1,11 @@
 ﻿using System.Web;
 using System.Web.Optimization;
+using SheepTracker.Web.Bundling;
 
 namespace SheepTracker.Web
 {
     public class BundleConfig
     {
-        private class DotLessBundle: IBundleTransform
-        {
-            public void Process(BundleContext context, BundleResponse response)
-            {
-                response.Content = dotless.Core.Less.Parse(response.Content);
-                response.ContentType = "text/css";
-            }
-        }
-
         public static void RegisterBundles(BundleCollection bundles)
         {
             bundles.Add(new ScriptBundle("~/bundles/jquery").Include(
@@ -31,10 +23,16 @@ namespace SheepTracker.Web
 
             bundles.Add(new StyleBundle("~/Content/css").Include("~/Content/site.css"));
 
-            bundles.Add(new StyleBundle("~/Content/themes/app/css").Include(
-                "~/Scripts/dijit/dijit.css",
-                "~/Scripts/dijit/themes/claro/claro.css",
-                "~/Content/themes/app/*.css"));
+            //bundles.Add(new StyleBundle("~/Content/themes/app/css").Include(
+            //    "~/Scripts/dijit/dijit.css",
+            //    "~/Scripts/dijit/themes/claro/claro.css",
+            //    "~/Content/themes/app/*.min.css"));
+
+            bundles.Add(new Bundle("~/Content/themes/app/css")
+                            {
+                                Transforms = {new DotlessTransform()}
+                            }
+                            .Include("~/Content/themes/app/*.less"));
 
             bundles.Add(new StyleBundle("~/Content/themes/base/css").Include(
                         "~/Content/themes/base/jquery.ui.core.css",
