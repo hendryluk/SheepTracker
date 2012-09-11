@@ -5,6 +5,15 @@ namespace SheepTracker.Web
 {
     public class BundleConfig
     {
+        private class DotLessBundle: IBundleTransform
+        {
+            public void Process(BundleContext context, BundleResponse response)
+            {
+                response.Content = dotless.Core.Less.Parse(response.Content);
+                response.ContentType = "text/css";
+            }
+        }
+
         public static void RegisterBundles(BundleCollection bundles)
         {
             bundles.Add(new ScriptBundle("~/bundles/jquery").Include(
