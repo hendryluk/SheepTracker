@@ -7,9 +7,6 @@
  * configuration into index.html (as a dojoConfig object) if it makes your life easier.
  */
 require({
-    // The base path for all packages and modules. If you don't provide this, baseUrl defaults to the directory
-    // that contains dojo.js. Since all packages are in the root, we just leave it blank. (If you change this, you
-    // will also need to update `app.profile.js`).
     parseOnLoad: true,
     // A list of packages to register. Strictly speaking, you do not need to register any packages,
     // but you can't require "app" and get app/main.js if you do not register the "app" package (the loader will look

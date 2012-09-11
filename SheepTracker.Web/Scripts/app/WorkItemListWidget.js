@@ -1,6 +1,11 @@
 ﻿define(['dojo/_base/declare', 'dijit/_WidgetBase', 'dijit/_TemplatedMixin', 'dijit/_WidgetsInTemplateMixin', 'dojo/text!./templates/WorkItemListWidget.html',
         'dojox/mvc', 'dojox/rpc/Rest', 'dojorx',
-        'dojox/mvc/Group', 'dijit/form/TextBox', 'dojox/mvc/Output', 'dojox/mvc/Repeat', 'dojox/mvc/at', './WorkItemListItemWidget'],
+    
+        'dojox/mvc/Group',
+        'dijit/form/TextBox',
+        'dojox/mvc/Output',
+        'dojox/mvc/WidgetList',
+        './WorkItemListItemWidget'],
     function (declare, _WidgetBase, _TemplatedMixin, _WidgetsInTemplateMixin, template,
         mvc, Rest, rx) {
         

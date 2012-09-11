@@ -5,10 +5,12 @@
         mvc, rx) {
         return declare("app.WorkItemListItemWidget", [_WidgetBase, _TemplatedMixin, _WidgetsInTemplateMixin], {
             templateString: template,
+            viewDetails: function () {
+                alert(this.model.a);
+            },
             startup: function () {
                 this.inherited(arguments);
-                console.log("ITEM: " + this.item);
-                this.model = mvc.getStateful(this.item);
+                
             }
         });
 });
