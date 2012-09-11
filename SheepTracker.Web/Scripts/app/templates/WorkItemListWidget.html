@@ -1,7 +1,9 @@
 ﻿<div>
     <script type="dojo/require">at: "dojox/mvc/at"</script>
     <div data-dojo-type="dojox.mvc.Group" data-dojo-props="target: this.model">
-        <input type="text" data-dojo-Type="dijit.form.TextBox" data-dojo-props="value: at('rel:', 'searchTerms'), intermediateChanges:true" />
+        <input data-dojo-Type="dijit.form.TextBox" 
+                data-dojo-attach-point="txSearch"
+                data-dojo-props="value: at('rel:', 'searchTerms'), intermediateChanges:true" />
         <div data-dojo-type="dojox.mvc.WidgetList" 
             data-dojo-props="children: at('rel:', 'searchResults')"
             data-mvc-child-type="app/WorkItemListItemWidget"
