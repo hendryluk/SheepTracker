@@ -3,8 +3,15 @@
     <script src="~/Scripts/rx.min.js"></script>
     <script src="~/Scripts/rx.time.min.js"></script>
 
-    <script data-dojo-config="async: 1, tlmSiblingOfDojo: 0, isDebug: 1, baseUrl: '@Href("~/Scripts/")'" src="~/Scripts/dojo/dojo.js"></script>
+    <script data-dojo-config="async: 1, tlmSiblingOfDojo: 0, isDebug: 1, baseUrl: '@Href("~/Scripts/")', appUrl: '@Href("~")'" src="~/Scripts/dojo/dojo.js"></script>
     <script src="~/Scripts/app/run.js"></script>
+    
+    <style type="text/css">
+        @@import "@Href("~/Scripts/dijit/Themes/claro/claro.css")";
+    </style>
 }
 
+<div>
+    @Html.ActionLink("Home", "Index", "Home")
+</div>
 <section data-dojo-type="app.DashboardWidget"></section>

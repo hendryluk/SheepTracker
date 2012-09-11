@@ -17,7 +17,7 @@
                     searchTerms: "123"
                 });
             },
-            searchRest: new Rest("/SheepTracker/api/WorkItems", true),
+            searchRest: new Rest(dojo.getUrl("/api/WorkItems"), true),
             postCreate: function () {
                 rx.watch(this.model, 'searchTerms')
                     .throttle(300)

@@ -18,15 +18,22 @@
  * <http://dojotoolkit.org/reference-guide/loader/amd.html>.
  */
 define(['dojo/has', 'require'], function (has, require) {
-    var app = {};
-
+    dojo.mixin(dojo, {
+        getUrl: function (path) {
+            return this.config.appUrl + path;
+        }
+    });
+    
     /**
 	 * This main.js file conditionally executes different code depending upon the host environment it is loaded in.
 	 * This is an increasingly common pattern when dealing with applications that run in different environments that
 	 * require different functionality (i.e. client/server or desktop/tablet/phone).
 	 */
+
     if (has('host-browser')) {
-        require(['dojo/parser', './DashboardWidget', 'dojo/domReady!']);
+        require(['dojo/parser', './DashboardWidget', 'dojo/domReady!'], function () {
+            dojo.extend(dijit._WidgetBase, { "appUrl": dojo.config.appUrl });
+        });
     }
     else {
         // TODO: Eventually, the Boilerplate will actually have a useful server implementation here :)

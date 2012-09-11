@@ -12,7 +12,7 @@ namespace SheepTracker.Web.Controllers
     {
         public IEnumerable Get(string q, int pageSize, int pageIndex)
         {
-            Thread.Sleep(5000);
+            Thread.Sleep(3000);
             return new[] {new {a = "bbb", b = "ccc"}, new {a = "xxx", b = "yyy"}};
         }
 
