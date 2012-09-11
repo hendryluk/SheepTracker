@@ -10,6 +10,7 @@
         mvc, Rest, rx) {
         
         return declare("app.WorkItemListWidget", [_WidgetBase, _TemplatedMixin, _WidgetsInTemplateMixin], {
+            baseClass: "WorkItemList",
             templateString: template,
             constructor: function () {
                 this.model = mvc.getStateful({
@@ -33,9 +34,9 @@
                     }));
             },
             _search: function (searchText) {
-                dojo.style(this.txSearch.textbox, "color", "red");
+                dojo.addClass(this.txSearch.domNode, "searching");
                 var onCompleted = dojo.hitch(this, function() {
-                    dojo.style(this.txSearch.textbox, { "color": "green" });
+                    dojo.removeClass(this.txSearch.domNode, "searching");
                 });
 
                 return this.searchRest({ q: searchText, pageSize: 10, pageIndex: 0 })

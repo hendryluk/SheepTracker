@@ -22,6 +22,11 @@ namespace SheepTracker.Web
 
             bundles.Add(new StyleBundle("~/Content/css").Include("~/Content/site.css"));
 
+            bundles.Add(new StyleBundle("~/Content/themes/app/css").Include(
+                "~/Scripts/dijit/dijit.css",
+                "~/Scripts/dijit/themes/claro/claro.css",
+                "~/Content/themes/app/*.css"));
+
             bundles.Add(new StyleBundle("~/Content/themes/base/css").Include(
                         "~/Content/themes/base/jquery.ui.core.css",
                         "~/Content/themes/base/jquery.ui.resizable.css",
