@@ -1,5 +1,5 @@
-﻿define(['dojo/_base/lang', './main'], function (lang, Rx) {
-    lang.extend(Rx.AsyncSubject, {
+﻿define(['dojo/_base/lang', './_base'], function (lang, rx) {
+    lang.extend(rx.AsyncSubject, {
         asDeferred: function () {
             var deferred = new dojo.Deferred();
             this.subscribe(function (value) {

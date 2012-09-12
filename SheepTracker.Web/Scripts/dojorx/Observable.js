@@ -1,5 +1,15 @@
-﻿define(['dojo/_base/lang', './main'], function (lang, Rx) {
-    return lang.mixin(Rx.Observable, {
+﻿define(['dojo/_base/lang', './_base'], function (lang, rx) {
+    var Observable = rx.Observable;
+
+    lang.extend(Observable, {
+        bindToStateful: function (stateful, attrName) {
+            return this.subscribe(function(val) {
+                stateful.set(attrName, val);
+            });
+        }
+    });
+
+    return lang.mixin(Observable, {
         fromDojoEvent: function(dojoObject, eventType, context, dontFix) {
             return Rx.Observable.create(function(observer) {
                 var handler = function(eventObject) {

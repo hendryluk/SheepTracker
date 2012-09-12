@@ -2,12 +2,18 @@
     <script type="dojo/require">at: "dojox/mvc/at"</script>
     <div data-dojo-type="dojox.mvc.Group" data-dojo-props="target: this.model">
         <input data-dojo-Type="dijit.form.TextBox" 
-                data-dojo-attach-point="txSearch"
-                data-dojo-props="value: at('rel:', 'searchTerms'), intermediateChanges:true" />
-        <div data-dojo-type="dojox.mvc.WidgetList" 
-            data-dojo-props="children: at('rel:', 'searchResults')"
-            data-mvc-child-type="app/WorkItemListItemWidget"
-            data-mvc-child-props="model: this.target">
+               data-dojo-attach-point="txSearch"
+               data-dojo-props="value: at('rel:', 'searchTerms'), intermediateChanges:true" />
+        <div class="searchResults">
+            <div data-dojo-type="dojox.mvc.Output" data-dojo-props="value: at(this.model, 'searchTerms'), exprchar:'#'">
+                    Create Task #{this.value}
+            </div>
+            <div data-dojo-type="dojox.mvc.WidgetList" 
+                 data-dojo-props="children: at('rel:', 'searchResults')"
+                 data-mvc-child-type="app/WorkItemListItemWidget"
+                 data-mvc-child-props="model: this.target">
+            </div>    
         </div>
+        
     </div>
 </div>

@@ -1,19 +1,6 @@
-﻿define(['dojo/_base/lang', 'dojo/_base/Deferred'],
-    function (lang, Deferred) {
-        var rx = lang.mixin(window.Rx, {
-            watch: function (stateful, propertyName) {
-                return Rx.Observable.create(function (observer) {
-                    var handler = function (eventObject) {
-                        observer.onNext(eventObject);
-                    },
-                    handle = stateful.watch(propertyName, handler);
-                    return function () {
-                        dojo.disconnect(handle);
-                    };
-                });
-            }
-        });
-        
+﻿define(['dojo/_base/lang', './_base', 'dojo/_base/Deferred', './Observable', './AsyncSubject'],
+    function (lang, rx, Deferred) {
+         
         lang.extend(Deferred, {
             asObservable: function () {
                 var subject = new rx.AsyncSubject();
