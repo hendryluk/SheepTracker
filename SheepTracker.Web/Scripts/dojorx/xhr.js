@@ -1,5 +1,5 @@
 ﻿define(['dojo/_base/xhr', './AsyncSubject'], function (xhr, AsyncSubject) {
-    return dojo.mixin(xhr, {
+    return dojo.delegate(xhr, {
         getAsObservable: function (options) {
             var subject = new AsyncSubject();
             options.load = function(data) {

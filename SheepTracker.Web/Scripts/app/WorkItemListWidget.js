@@ -8,17 +8,19 @@
         './WorkItemListItemWidget'],
     function (declare, _WidgetBase, _TemplatedMixin, _WidgetsInTemplateMixin, template,
         mvc, Rest, rx) {
-        
+
         return declare("app.WorkItemListWidget", [_WidgetBase, _TemplatedMixin, _WidgetsInTemplateMixin], {
             baseClass: "WorkItemList",
             templateString: template,
             constructor: function () {
+                this.searchRest = new Rest(getUrl("/api/WorkItems"), true);
+                
                 this.model = mvc.getStateful({
                     searchResults: [],
-                    searchTerms: "123"
+                    searchTerms: ""
                 });
             },
-            searchRest: new Rest(dojo.getUrl("/api/WorkItems"), true),
+            searchRest: null,
             postCreate: function () {
                 rx.watch(this.model, 'searchTerms')
                     .throttle(300)

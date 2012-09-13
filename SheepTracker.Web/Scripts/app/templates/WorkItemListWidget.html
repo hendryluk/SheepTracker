@@ -6,7 +6,7 @@
                data-dojo-props="value: at('rel:', 'searchTerms'), intermediateChanges:true" />
         <div class="searchResults">
             <div data-dojo-type="dojox.mvc.Output" data-dojo-props="value: at(this.model, 'searchTerms'), exprchar:'#'">
-                    Create Task #{this.value}
+                    Create Task: #{this.value}
             </div>
             <div data-dojo-type="dojox.mvc.WidgetList" 
                  data-dojo-props="children: at('rel:', 'searchResults')"
@@ -14,6 +14,5 @@
                  data-mvc-child-props="model: this.target">
             </div>    
         </div>
-        
     </div>
 </div>

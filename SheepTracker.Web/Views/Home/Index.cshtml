@@ -1,15 +1,41 @@
-﻿@section scripts
-{
-    <script src="~/Scripts/rx.min.js"></script>
-    <script src="~/Scripts/rx.time.min.js"></script>
-
-    <script data-dojo-config="async: 1, tlmSiblingOfDojo: 0, isDebug: 1, baseUrl: '@Href("~/Scripts/")', appUrl: '@Href("~")'" src="~/Scripts/dojo/dojo.js"></script>
-    <script src="~/Scripts/app/run.js"></script>
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
     
-    @Styles.Render("~/Content/themes/app/css")
-}
+    @Scripts.Render("~/bundles/modernizr")
+    @Styles.Render("~/Content/themes/base/css", "~/Content/css")
+    
+    <script>
+        function getUrl(path) {
+            return "@Href("~")" + path;
+        };
+        
+        var dojoConfig = {
+            async: 1,
+            tlmSiblingOfDojo: 0,
+            isDebug: 1,
+            baseUrl: "@Href("~/Scripts/")"
+        };
+    </script>
 
-<div>
-    @Html.ActionLink("Home", "Index", "Home")
-</div>
-<section data-dojo-type="app.DashboardWidget"></section>
+    @Styles.Render("~/Content/themes/app/css")
+</head>
+    <body class="claro">
+        <div id="loadingOverlay" class="pageOverlay">
+            <div class="loadingMessage">Loading...</div>
+        </div>
+
+        <section data-dojo-type="app.main"></section>
+        
+        
+        <script src="~/Scripts/rx.min.js"></script>
+        <script src="~/Scripts/rx.time.min.js"></script>
+        <script src="~/Scripts/dojo/dojo.js"></script>
+        <script src="~/Scripts/app/run.js"></script>
+    </body>
+</html>
+
+

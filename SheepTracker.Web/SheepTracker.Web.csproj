@@ -173,8 +173,7 @@
     <Content Include="Scripts\app\effects\_WidgetListFadeInMixin.js" />
     <Content Include="Scripts\app\main.js" />
     <Content Include="Scripts\app\run.js" />
-    <Content Include="Scripts\app\DashboardWidget.js" />
-    <Content Include="Scripts\app\templates\DashboardWidget.html" />
+    <Content Include="Scripts\app\templates\app.html" />
     <Content Include="Scripts\app\templates\WorkItemListItemWidget.html" />
     <Content Include="Scripts\app\templates\WorkItemListWidget.html" />
     <Content Include="Scripts\app\WorkItemListItemWidget.js" />
@@ -9095,6 +9094,7 @@
     <Content Include="Scripts\bootstrap\package.json" />
     <Content Include="Content\themes\app\WorkItemList.less" />
     <Content Include="Content\themes\app\variables.less" />
+    <Content Include="Content\themes\app\app.less" />
     <None Include="Scripts\jquery-1.6.2-vsdoc.js" />
     <Content Include="Scripts\dojo\tests\touch.js" />
     <Content Include="Scripts\dojo\tests\uacss.js" />

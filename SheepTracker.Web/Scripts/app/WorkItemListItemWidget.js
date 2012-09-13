@@ -1,4 +1,5 @@
-﻿define(['dojo/_base/declare', 'dijit/_WidgetBase', 'dijit/_TemplatedMixin', 'dijit/_WidgetsInTemplateMixin', 'dojo/text!./templates/WorkItemListItemWidget.html',
+﻿define(['dojo/_base/declare', 'dijit/_WidgetBase', 'dijit/_TemplatedMixin', 'dijit/_WidgetsInTemplateMixin',
+        'dojo/text!./templates/WorkItemListItemWidget.html',
         'dojox/mvc', 'dojorx',
         'dojox/mvc/Output'],
     function (declare, _WidgetBase, _TemplatedMixin, _WidgetsInTemplateMixin, template,
@@ -10,7 +11,6 @@
             },
             startup: function () {
                 this.inherited(arguments);
-                
             }
         });
 });

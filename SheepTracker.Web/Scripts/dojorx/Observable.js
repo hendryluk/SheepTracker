@@ -9,7 +9,7 @@
         }
     });
 
-    return lang.mixin(Observable, {
+    return lang.delegate(Observable, {
         fromDojoEvent: function(dojoObject, eventType, context, dontFix) {
             return Rx.Observable.create(function(observer) {
                 var handler = function(eventObject) {

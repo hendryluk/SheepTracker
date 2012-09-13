@@ -1,6 +1,6 @@
 ﻿define(['dojo/_base/lang'],
     function (lang) {
-        var rx = lang.mixin(window.Rx, (function () {
+        var rx = lang.delegate(window.Rx, (function () {
             function watch(stateful, propertyName) {
                 var props = propertyName.split(".", 2);
                 if (props.length > 1) {

@@ -17,26 +17,30 @@
  * More information about everything described about the loader throughout this file can be found at
  * <http://dojotoolkit.org/reference-guide/loader/amd.html>.
  */
-define(['dojo/has', 'require'], function (has, require) {
-    dojo.mixin(dojo, {
-        getUrl: function (path) {
-            return this.config.appUrl + path;
-        }
+define(['dojo/_base/declare', 'dojo/dom', 'dojo/dom-style',
+        'dijit/_WidgetBase', 'dijit/_TemplatedMixin', 'dijit/_WidgetsInTemplateMixin',
+        'dojo/text!./templates/app.html',
+        './WorkItemListWidget'],
+    function (declare, dom, domStyle,
+        _WidgetBase, _TemplatedMixin, _WidgetsInTemplateMixin, template) {
+        
+        return declare("app.main", [_WidgetBase, _TemplatedMixin, _WidgetsInTemplateMixin], {
+            loadingOverlay: null,
+            templateString: template,
+            _endLoading: function() {
+                dojo.fadeOut({
+                    node: this.loadingOverlay,
+                    onEnd: function (node) {
+                        domStyle.set(node, {"display": "none"});
+                    }
+                }).play();
+            },
+            
+            startup: function () {
+                this.inherited(arguments);
+                this.loadingOverlay = dom.byId("loadingOverlay");
+                this._endLoading();
+            },
+            
     });
-    
-    /**
-	 * This main.js file conditionally executes different code depending upon the host environment it is loaded in.
-	 * This is an increasingly common pattern when dealing with applications that run in different environments that
-	 * require different functionality (i.e. client/server or desktop/tablet/phone).
-	 */
-
-    if (has('host-browser')) {
-        require(['dojo/parser', './DashboardWidget', 'dojo/domReady!'], function () {
-            dojo.extend(dijit._WidgetBase, { "appUrl": dojo.config.appUrl });
-        });
-    }
-    else {
-        // TODO: Eventually, the Boilerplate will actually have a useful server implementation here :)
-        console.log('Hello from the server!');
-    }
 });
