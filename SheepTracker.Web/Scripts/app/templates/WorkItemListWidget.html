@@ -4,14 +4,21 @@
         <input data-dojo-Type="dijit.form.TextBox" 
                data-dojo-attach-point="txSearch"
                data-dojo-props="value: at('rel:', 'searchTerms'), intermediateChanges:true" />
-        <div class="searchResults">
-            <div data-dojo-type="dojox.mvc.Output" data-dojo-props="value: at(this.model, 'searchTerms'), exprchar:'#'">
-                    Create Task: #{this.value}
+
+        <div class="searchResultsPanel" data-dojo-attach-point="searchResultsPanel">
+            <div class="selectable" data-dojo-type="dojox.mvc.Output" data-dojo-props="value: at(this.model, 'searchTerms'), exprchar:'#'">
+                Create Task: #{this.value}
             </div>
             <div data-dojo-type="dojox.mvc.WidgetList" 
-                 data-dojo-props="children: at('rel:', 'searchResults')"
-                 data-mvc-child-type="app/WorkItemListItemWidget"
-                 data-mvc-child-props="model: this.target">
+                 data-dojo-mixins="dojox.mvc._InlineTemplateMixin"
+                 data-dojo-props="children: at('rel:', 'searchResults')">
+                <script type="dojox/mvc/InlineTemplate">
+                    <div class="selectable">
+                        <span data-dojo-type="dojox.mvc.Output" data-dojo-props="value: this.target.a"></span>
+                        <span class="selectable-action">hit me</span>
+                    </div>
+                
+                </script>
             </div>    
         </div>
     </div>

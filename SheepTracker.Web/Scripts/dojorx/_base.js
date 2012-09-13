@@ -20,7 +20,9 @@
             }
 
             function selectProperty(stateful, propertyName) {
-                return watch(stateful.propertyName).startWith(stateful.get(propertyName));
+                return watch(stateful, propertyName)
+                    .select(function () { return stateful.get(propertyName); })
+                    .startWith(stateful.get(propertyName));
             }
             
             function selectProperties(stateful, propertyNames) {
@@ -40,12 +42,25 @@
                     .select(selector)
                     .bindToStateful(stateful, targetName);
             }
+            
+            function on(dojoObject, eventType) {
+                return Rx.Observable.create(function(observer) {
+                    var handler = function(eventObject) {
+                        observer.onNext(eventObject);
+                    },
+                        handle = dojo.connect(dojoObject, eventType, handler);
+                    return function() {
+                        handle.remove();
+                    };
+                });
+            }
 
             return {
                 watch: watch,
                 selectProperty: selectProperty,
                 selectProperties: selectProperties,
-                deriveProperties: deriveProperties
+                deriveProperties: deriveProperties,
+                on: on
             };
         })());
 
