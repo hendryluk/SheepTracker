@@ -1,6 +1,7 @@
 ﻿define(['dojo/_base/declare', 'dojo/dom-style',
 
         'dijit/_WidgetBase', 'dijit/_TemplatedMixin', 'dijit/_WidgetsInTemplateMixin', 'dojo/text!./templates/WorkItemListWidget.html',
+        'dgrid/OnDemandGrid', 'dgrid/Keyboard', 'dgrid/Selection', 'dojo/store/Memory',
         'dojox/mvc', 'dojox/rpc/Rest', 'dojorx',
     
         'dojox/mvc/Repeat',
@@ -11,6 +12,7 @@
         './WorkItemListItemWidget'],
     function (declare, domStyle,
         _WidgetBase, _TemplatedMixin, _WidgetsInTemplateMixin, template,
+        OnDemandGrid, Keyboard, Selection, Memory,
         mvc, Rest, rx) {
 
         return declare("app.WorkItemListWidget", [_WidgetBase, _TemplatedMixin, _WidgetsInTemplateMixin], {
@@ -26,36 +28,47 @@
             },
             searchRest: null,
             postCreate: function () {
-                this._searchTermsObserved = rx.selectProperty(this.model, 'searchTerms');
+                //this._searchTermsObserved = rx.selectProperty(this.model, 'searchTerms');
 
-                this._searchTermsObserved
-                    .throttle(300)
-                    .distinctUntilChanged()
-                    .where(function (q) { return q.length > 0; })
-                    .select(dojo.hitch(this,this._search))
-                    .switchLatest()
-                    .subscribe(dojo.hitch(this, function (data) {
-                        this.model.set("searchResults", data);
-                        this._setDefaultSelection();
-                    }));
+                //this._searchTermsObserved
+                //    .throttle(300)
+                //    .distinctUntilChanged()
+                //    .where(function (q) { return q.length > 0; })
+                //    .select(dojo.hitch(this,this._search))
+                //    .switchLatest()
+                //    .subscribe(dojo.hitch(this, function (data) {
+                //        this.model.set("searchResults", data);
+                //        this._setDefaultSelection();
+                //    }));
 
-                rx.on(this.domNode, ".selectable-action:click").subscribe(function () { alert("aaaa"); });
-                rx.on(window, "keydown").subscribe(dojo.hitch(this, function (evt) {
-                    switch(evt.keyCode) {
-                        case dojo.keys.DOWN_ARROW:
-                            this._selectDown();
-                            break;
-                        case dojo.keys.UP_ARROW:
-                            this._selectUp();
-                            break;
-                    }
-                }));
+                //rx.on(this.domNode, ".selectable-action:click").subscribe(function () { alert("aaaa"); });
+                //rx.on(window, "keydown").subscribe(dojo.hitch(this, function (evt) {
+                //    switch(evt.keyCode) {
+                //        case dojo.keys.DOWN_ARROW:
+                //            this._selectDown();
+                //            break;
+                //        case dojo.keys.UP_ARROW:
+                //            this._selectUp();
+                //            break;
+                //    }
+                //}));
             },
             startup: function () {
                 this.inherited(arguments);
-                this._searchTermsObserved.subscribe(dojo.hitch(this, function (term) {
-                    domStyle.set(this.searchResultsPanel, {display: (term.length > 0)?"block": "none"});
-                }));
+                //this._searchTermsObserved.subscribe(dojo.hitch(this, function (term) {
+                //    domStyle.set(this.searchResultsPanel, {display: (term.length > 0)?"block": "none"});
+                //}));
+
+                var MyGrid = new declare([OnDemandGrid, Keyboard, Selection], {
+                    
+                });
+
+                var grid = new MyGrid({
+                    store: new Memory({ data: [{ a: "aaa" }, { a: "bbb" },{a:"ccc"}] }),
+                    columns: { a: "A" }
+                }, "workItems");
+                //itemsGrid.startup();
+                //dojo.place(itemsGrid.domNode, "workItems", "last");
             },
             _selectDown: function() {
                 var selectables = dojo.query(".selectable");

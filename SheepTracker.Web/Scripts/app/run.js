@@ -20,6 +20,9 @@ require({
 		'dijit',
 		'dojox',
         'dojorx',
+        'xstyle',
+        'put-selector',
+        'dgrid',
 		// For reference, this is what a more verbose package declaration looks like.
 		{ name: 'app', location: 'app', map: {} }
     ]
