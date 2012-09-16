@@ -60,7 +60,7 @@
                 }));
             },
             _selectDown: function() {
-                var selectables = dojo.query(".selectable");
+                var selectables = dojo.query(".selectable", this.domNode);
                 var selected = selectables.filter(".selected")[0];
                 var selectedIndex = selectables.indexOf(selected);
                 
@@ -70,7 +70,7 @@
                 }
             },
             _selectUp: function () {
-                var selectables = dojo.query(".selectable");
+                var selectables = dojo.query(".selectable", this.domNode);
                 var selected = selectables.filter(".selected")[0];
                 var selectedIndex = selectables.indexOf(selected);
 
@@ -80,6 +80,8 @@
                 }
             },
             _setDefaultSelection: function () {
+                dojo.query(".selected", this.domNode).removeClass("selected");
+
                 var node = dojo.query(".selectable.work-item:first-of-type", this.domNode);
                 if (node == null)
                     node = dojo.query(".selectable:first-of-type", this.domNode);
