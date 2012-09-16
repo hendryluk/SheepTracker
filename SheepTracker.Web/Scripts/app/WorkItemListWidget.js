@@ -41,8 +41,13 @@
 
                 rx.on(this.domNode, ".selectable-action:click").subscribe(function () { alert("aaaa"); });
                 rx.on(window, "keydown").subscribe(dojo.hitch(this, function (evt) {
-                    if(evt.keyCode == dojo.keys.DOWN_ARROW) {
-                        this._selectDown();
+                    switch(evt.keyCode) {
+                        case dojo.keys.DOWN_ARROW:
+                            this._selectDown();
+                            break;
+                        case dojo.keys.UP_ARROW:
+                            this._selectUp();
+                            break;
                     }
                 }));
             },
@@ -53,21 +58,28 @@
                 }));
             },
             _selectDown: function() {
-                var selectedNode = this._getCurrentSelection();
-                var newNode = dojo.query(".selectable:nth-of-type(1)", selectedNode);
-
-                debugger;
-                if (newNode.length > 0) {
-                    dojo.removeClass(selectedNode, "selected");
-                    dojo.addClass(newNode[0], "selected");
+                var selectables = dojo.query(".selectable");
+                var selected = selectables.filter(".selected")[0];
+                var selectedIndex = selectables.indexOf(selected);
+                
+                if (selectedIndex < selectables.length - 1) {
+                    dojo.removeClass(selected, "selected");
+                    dojo.addClass(selectables[selectedIndex + 1], "selected");
                 }
             },
-            _getCurrentSelection: function() {
-                return dojo.query(".selectable.selected:first-of-type", this.domNode)[0];
+            _selectUp: function () {
+                var selectables = dojo.query(".selectable");
+                var selected = selectables.filter(".selected")[0];
+                var selectedIndex = selectables.indexOf(selected);
+
+                if (selectedIndex > 0) {
+                    dojo.removeClass(selected, "selected");
+                    dojo.addClass(selectables[selectedIndex - 1], "selected");
+                }
             },
             _setDefaultSelection: function () {
                 var node = dojo.query(".selectable.work-item:first-of-type", this.domNode);
-                if (node.length == 0)
+                if (node == null)
                     node = dojo.query(".selectable:first-of-type", this.domNode);
 
                 dojo.addClass(node[0], "selected");
