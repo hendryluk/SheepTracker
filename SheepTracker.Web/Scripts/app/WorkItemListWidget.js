@@ -43,9 +43,11 @@
                 rx.on(window, "keydown").subscribe(dojo.hitch(this, function (evt) {
                     switch(evt.keyCode) {
                         case dojo.keys.DOWN_ARROW:
+                            evt.preventDefault();
                             this._selectDown();
                             break;
                         case dojo.keys.UP_ARROW:
+                            evt.preventDefault();
                             this._selectUp();
                             break;
                     }
