@@ -13,7 +13,24 @@ namespace SheepTracker.Web.Controllers
         public IEnumerable Get(string q, int pageSize, int pageIndex)
         {
             //Thread.Sleep(3000);
-            return new[] {new {a = "bbb", b = "ccc"}, new {a = "xxx", b = "yyy"}};
+            //return new[] {new
+            //                  {
+            //                      Title = "bbb", Actions= []
+            //                  }, new {Title = "xxx", Actions = "yyy"}};
+
+            return new[]
+                       {
+                           new { Title = "aaa bbb ccc", Actions = new []
+                                {
+                                    new {Type = "Details", Uri = "/WorkItems/Blah"},
+                                    new {Type = "Start", Uri = "/WorkItems/Blah"}
+                                }},
+                            new { Title = "vvv xxx yyy", Actions = new []
+                                {
+                                    new {Type = "Details", Uri = "/WorkItems/Blah"},
+                                    new {Type = "CreateTask", Uri = "/WorkItems/Blah"}
+                                }}
+                       };
         }
 
     }

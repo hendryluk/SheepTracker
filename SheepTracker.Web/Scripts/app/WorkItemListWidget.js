@@ -13,7 +13,55 @@
         _WidgetBase, _TemplatedMixin, _WidgetsInTemplateMixin, template,
         mvc, Rest, rx) {
 
-        return declare("app.WorkItemListWidget", [_WidgetBase, _TemplatedMixin, _WidgetsInTemplateMixin], {
+        var keyboardNavigationMixin = declare(null, {
+            _isNavigatingList: null,
+            startup: function() {
+                this.inherited(arguments);
+                rx.on(window, "keydown")
+                    .subscribe(dojo.hitch(this, function(evt) {
+                        switch (evt.keyCode) {
+                        case dojo.keys.DOWN_ARROW:
+                            evt.preventDefault();
+                            this._selectDown();
+                            break;
+                        case dojo.keys.UP_ARROW:
+                            evt.preventDefault();
+                            this._selectUp();
+                            break;
+                        case dojo.keys.ENTER:
+                            evt.preventDefault();
+                            this._focusNavigationToSelection();
+                            break;
+                        }
+                    }));
+            },
+            _focusNavigationToSelection: function() {
+                var selectedWidget = dijit.byNode(dojo.query(".selectable", this.domNode)[0]);
+                (selectedWidget.onPressedEnter||function(){})();
+            },
+            _selectDown: function() {
+                var selectables = dojo.query(".selectable", this.domNode);
+                var selected = selectables.filter(".selected")[0];
+                var selectedIndex = selectables.indexOf(selected);
+
+                if (selectedIndex < selectables.length - 1) {
+                    dojo.removeClass(selected, "selected");
+                    dojo.addClass(selectables[selectedIndex + 1], "selected");
+                }
+            },
+            _selectUp: function() {
+                var selectables = dojo.query(".selectable", this.domNode);
+                var selected = selectables.filter(".selected")[0];
+                var selectedIndex = selectables.indexOf(selected);
+
+                if (selectedIndex > 0) {
+                    dojo.removeClass(selected, "selected");
+                    dojo.addClass(selectables[selectedIndex - 1], "selected");
+                }
+            }
+        });
+        
+        return declare("app.WorkItemListWidget", [_WidgetBase, _TemplatedMixin, _WidgetsInTemplateMixin, keyboardNavigationMixin], {
             baseClass: "WorkItemList",
             templateString: template,
             constructor: function () {
@@ -40,18 +88,7 @@
                     }));
 
                 rx.on(this.domNode, ".selectable-action:click").subscribe(function () { alert("aaaa"); });
-                rx.on(window, "keydown").subscribe(dojo.hitch(this, function (evt) {
-                    switch(evt.keyCode) {
-                        case dojo.keys.DOWN_ARROW:
-                            evt.preventDefault();
-                            this._selectDown();
-                            break;
-                        case dojo.keys.UP_ARROW:
-                            evt.preventDefault();
-                            this._selectUp();
-                            break;
-                    }
-                }));
+                
             },
             startup: function () {
                 this.inherited(arguments);
@@ -59,26 +96,7 @@
                     domStyle.set(this.searchResultsPanel, {display: (term.length > 0)?"block": "none"});
                 }));
             },
-            _selectDown: function() {
-                var selectables = dojo.query(".selectable", this.domNode);
-                var selected = selectables.filter(".selected")[0];
-                var selectedIndex = selectables.indexOf(selected);
-                
-                if (selectedIndex < selectables.length - 1) {
-                    dojo.removeClass(selected, "selected");
-                    dojo.addClass(selectables[selectedIndex + 1], "selected");
-                }
-            },
-            _selectUp: function () {
-                var selectables = dojo.query(".selectable", this.domNode);
-                var selected = selectables.filter(".selected")[0];
-                var selectedIndex = selectables.indexOf(selected);
-
-                if (selectedIndex > 0) {
-                    dojo.removeClass(selected, "selected");
-                    dojo.addClass(selectables[selectedIndex - 1], "selected");
-                }
-            },
+            
             _setDefaultSelection: function () {
                 dojo.query(".selected", this.domNode).removeClass("selected");
 
