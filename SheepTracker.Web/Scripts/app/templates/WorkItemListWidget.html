@@ -4,22 +4,25 @@
         <input data-dojo-Type="dijit.form.TextBox" 
                data-dojo-attach-point="txSearch"
                data-dojo-props="value: at('rel:', 'searchTerms'), intermediateChanges:true" />
+        
+        
 
         <div class="searchResultsPanel" data-dojo-attach-point="searchResultsPanel">
             <div class="selectable" data-dojo-type="dojox.mvc.Output" data-dojo-props="value: at(this.model, 'searchTerms'), exprchar:'#'">
                 + Create Task: #{this.value}
             </div>
-            <div data-dojo-type="dojox.mvc.WidgetList" 
-                 data-dojo-mixins="dojox.mvc._InlineTemplateMixin"
-                 data-dojo-props="children: at('rel:', 'searchResults')">
-                <script type="dojox/mvc/InlineTemplate">
-                    <div class="selectable work-item" data-dojo-props="">
-                        <span data-dojo-type="dojox.mvc.Output" data-dojo-props="value: this.target.Title"></span>
-                        <span class="selectable-action">hit me</span>
-                    </div>
-                
-                </script>
-            </div>    
+            
+            <div data-dojo-type="dojox.mvc.Repeat" data-dojo-props="children: at('rel:', 'searchResults'), exprchar:'#'">
+                <!--<div data-dojo-type="dojox.mvc.Group" data-dojo-props="target: at('rel:', '#{this.index}')">-->
+                    <div class="selectable work-item">
+                        <span data-dojo-type="dojox.mvc.Output" data-dojo-props="value: at('rel:#{this.index}', 'Title')"></span>
+                        
+                        <div class="actions" data-dojo-type="dojox.mvc.Repeat" data-dojo-props="children: at('rel:#{this.index}', 'Actions'), exprchar: '%'">
+                            <span class="selectable-action" data-dojo-type="dojox.mvc.Output" data-dojo-props="value: at('rel:%{this.index}', 'Type')"></span>          
+                        </div>
+                    </div>    
+                <!--</div>-->
+            </div> 
         </div>
     </div>
 </div>
