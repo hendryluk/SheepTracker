@@ -1,4 +1,5 @@
 ﻿<div style="display: none">
+    <script type="dojo/require">at: "dojox/mvc/at"</script>
     Lalalala
-    <div data-dojo-type="dojox.mvc.Output" data-dojo-attach-point="_lbTitle"></div>
+    <div data-dojo-type="dojox.mvc.Output" data-dojo-props="value: at(this.model, 'title')"></div>
 </div>

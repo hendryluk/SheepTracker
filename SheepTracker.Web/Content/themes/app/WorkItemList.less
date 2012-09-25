@@ -1,11 +1,16 @@
 @import "../variables.less";
 
-.WorkItemList .searching input {
-    background: @url-loading-animation  no-repeat right center;
+.WorkItemList {
+	width: 400px;
 }
 
-.WorkItemList .selectable {
-	width: 400px;
+.WorkItemList .txSearch {
+	width: 100%;
+}
+
+.WorkItemList .searching .work-item-list {
+    background: @url-loading-animation  no-repeat center center;
+	height: 40px;
 }
 
 .WorkItemList .selectable.selected {

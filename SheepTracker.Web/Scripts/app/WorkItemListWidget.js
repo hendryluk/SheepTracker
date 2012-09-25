@@ -17,8 +17,11 @@
         var workItemListWidget = declare("app.WorkItemListWidget", [_WidgetBase, _TemplatedMixin, _WidgetsInTemplateMixin], {
             baseClass: "WorkItemList",
             templateString: template,
-            txSearch: null, // attach-point
-            searchResultsPanel: null, // attach-point
+            
+            // Attach points
+            txSearch: null, 
+            searchResultsPanel: null,
+            
             searchTerms: "",
             searchResults: [],
             constructor: function () {
@@ -98,9 +101,11 @@
             var searchTermsObserved = rx.selectProperty(self.model, 'searchTerms');
 
             function search(searchText) {
-                dojo.addClass(self.txSearch.domNode, "searching");
+                self.model.set({ workItems: [] });
+                
+                dojo.addClass(self.searchResultsPanel, "searching");
                 var onCompleted = function () {
-                    dojo.removeClass(self.txSearch.domNode, "searching");
+                    dojo.removeClass(self.searchResultsPanel, "searching");
                 };
 
                 return searchRest({ q: searchText, pageSize: 10, pageIndex: 0 })
@@ -116,11 +121,14 @@
                 dojo.query(".selected", self.domNode).removeClass("selected");
 
                 var node = dojo.query(".selectable.work-item:first-of-type", self.domNode);
-                if (node == null)
+                if (!node.length)
                     node = dojo.query(".selectable:first-of-type", self.domNode);
 
                 self.select(node[0]);
             }
+
+            rx.watch(self.model, "workItems")
+                .subscribe(setDefaultSelection);
             
             searchTermsObserved
                 .throttle(300)
@@ -129,8 +137,8 @@
                 .select(search)
                 .switchLatest()
                 .subscribe(function (data) {
-                    self.model.set("searchResults", data);
-                    setDefaultSelection();
+                    self.model.set({ workItems: data });
+                    //setDefaultSelection();
                 });
 
             rx.on(self.domNode, ".selectable-action:click").subscribe(function () { alert("aaaa"); });

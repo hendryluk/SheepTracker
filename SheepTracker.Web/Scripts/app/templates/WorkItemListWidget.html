@@ -3,14 +3,15 @@
     <div data-dojo-type="dojox.mvc.Group" data-dojo-props="target: this.model">
         <input data-dojo-Type="dijit.form.TextBox" 
                data-dojo-attach-point="txSearch"
-               data-dojo-props="value: at('rel:', 'searchTerms'), intermediateChanges:true" />
+               data-dojo-props="value: at('rel:', 'searchTerms'), intermediateChanges:true"
+               class="txSearch" />
         
         <div class="searchResultsPanel" data-dojo-attach-point="searchResultsPanel">
             <div class="selectable" data-dojo-type="dojox.mvc.Output" data-dojo-props="value: at(this.model, 'searchTerms'), exprchar:'#'">
                 + Create Task: #{this.value}
             </div>
             
-            <div data-dojo-type="dojox.mvc.Repeat" data-dojo-props="children: at('rel:', 'searchResults'), exprchar:'#'">
+            <div data-dojo-type="dojox.mvc.Repeat" data-dojo-props="children: at('rel:', 'workItems'), exprchar:'#'" class="work-item-list">
                 <!--<div data-dojo-type="dojox.mvc.Group" data-dojo-props="target: at('rel:', '#{this.index}')">-->
                     <div class="selectable work-item" data-dojo-type="dijit._WidgetBase" data-dojo-props="target: at('rel:', '#{this.index}')">
                         <span data-dojo-type="dojox.mvc.Output" data-dojo-props="value: at('rel:', 'Title')"></span>
