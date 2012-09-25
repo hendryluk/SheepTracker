@@ -3,6 +3,7 @@
         'dijit/_WidgetBase', 'dijit/_TemplatedMixin', 'dijit/_WidgetsInTemplateMixin', 'dojo/text!./templates/WorkItemListWidget.html',
         'dojox/mvc', 'dojox/rpc/Rest', 'dojorx',
     
+        'dojo/NodeList-manipulate', 'dojo/NodeList-fx', 'dojo/NodeList-traverse',
         'dojox/mvc/Repeat',
         'dojox/mvc/Group',
         'dijit/form/TextBox',
@@ -13,6 +14,41 @@
         _WidgetBase, _TemplatedMixin, _WidgetsInTemplateMixin, template,
         mvc, Rest, rx) {
         
+        var workItemListWidget = declare("app.WorkItemListWidget", [_WidgetBase, _TemplatedMixin, _WidgetsInTemplateMixin], {
+            baseClass: "WorkItemList",
+            templateString: template,
+            txSearch: null, // attach-point
+            searchResultsPanel: null, // attach-point
+            searchTerms: "",
+            searchResults: [],
+            constructor: function () {
+                this.model = mvc.getStateful({
+                    searchResults: [],
+                    searchTerms: ""
+                });
+            },
+            startup: function () {
+                this.inherited(arguments);
+                initSearch(this);
+                initKeyboardNavigation(this);
+            },
+            select: function (node) {
+                dojo.query(".selected").removeClass("selected")
+                    .children(".action-list").fadeOut().play();
+
+                dojo.addClass(node, "selected");
+                dojo.query(".action-list", node).fadeIn().play();
+
+                var workItem=null;
+                if(dojo.hasClass(node, "work-item"))
+                    workItem = dijit.byNode(node).target;
+                
+                this.onSelectedWorkItem(workItem);
+            },
+            onSelectedWorkItem: function (workItem) { /* event */ }
+        });
+
+        
         function initKeyboardNavigation(self) {
             function selectDown() {
                 var selectables = dojo.query(".selectable", self.domNode);
@@ -20,8 +56,7 @@
                 var selectedIndex = selectables.indexOf(selected);
 
                 if (selectedIndex < selectables.length - 1) {
-                    dojo.removeClass(selected, "selected");
-                    dojo.addClass(selectables[selectedIndex + 1], "selected");
+                    self.select(selectables[selectedIndex + 1]);
                 }
             }
 
@@ -31,8 +66,7 @@
                 var selectedIndex = selectables.indexOf(selected);
 
                 if (selectedIndex > 0) {
-                    dojo.removeClass(selected, "selected");
-                    dojo.addClass(selectables[selectedIndex - 1], "selected");
+                    self.select(selectables[selectedIndex - 1]);
                 }
             }
             
@@ -41,7 +75,6 @@
                     return;
 
                 evt.preventDefault();
-                var selectedWidget = dijit.byNode(dojo.query(".selectable", self.domNode)[0]);
             }
 
             rx.on(window, "keydown")
@@ -88,7 +121,7 @@
                 if (node == null)
                     node = dojo.query(".selectable:first-of-type", self.domNode);
 
-                dojo.addClass(node[0], "selected");
+                self.select(node[0]);
             }
             
             searchTermsObserved
@@ -108,23 +141,6 @@
                 domStyle.set(self.searchResultsPanel, { display: (term.length > 0) ? "block" : "none" });
             });
         }
-        
-        return declare("app.WorkItemListWidget", [_WidgetBase, _TemplatedMixin, _WidgetsInTemplateMixin], {
-            baseClass: "WorkItemList",
-            templateString: template,
-            txSearch: null, // attach-point
-            searchResultsPanel: null, // attach-point
-            constructor: function () {
-                
-                this.model = mvc.getStateful({
-                    searchResults: [],
-                    searchTerms: ""
-                });
-            },
-            startup: function () {
-                this.inherited(arguments);
-                initSearch(this);
-                initKeyboardNavigation(this);
-            }
-        });
+
+        return workItemListWidget;
 });

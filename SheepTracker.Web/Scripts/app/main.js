@@ -18,29 +18,37 @@
  * <http://dojotoolkit.org/reference-guide/loader/amd.html>.
  */
 define(['dojo/_base/declare', 'dojo/dom', 'dojo/dom-style',
-        'dijit/_WidgetBase', 'dijit/_TemplatedMixin', 'dijit/_WidgetsInTemplateMixin',
-        'dojo/text!./templates/app.html',
-        './WorkItemListWidget'],
+        'dijit/_WidgetBase', 'dijit/_TemplatedMixin', 'dijit/_WidgetsInTemplateMixin', 'dojo/text!./templates/app.html',
+        'dojorx',
+    
+        './WorkItemListWidget', './WorkItemDetailsWidget'],
     function (declare, dom, domStyle,
-        _WidgetBase, _TemplatedMixin, _WidgetsInTemplateMixin, template) {
+        _WidgetBase, _TemplatedMixin, _WidgetsInTemplateMixin, template,
+        rx) {
         
         return declare("app.main", [_WidgetBase, _TemplatedMixin, _WidgetsInTemplateMixin], {
             loadingOverlay: null,
             templateString: template,
-            _endLoading: function() {
-                dojo.fadeOut({
-                    node: this.loadingOverlay,
-                    onEnd: function (node) {
-                        domStyle.set(node, {"display": "none"});
-                    }
-                }).play();
-            },
-            
+            // AttachPoints
+            _workItemList: null,
+            _workItemDetails: null,
+
             startup: function () {
                 this.inherited(arguments);
-                this.loadingOverlay = dom.byId("loadingOverlay");
-                this._endLoading();
+                endLoading(this);
+
+                rx.on(this._workItemList, "onSelectedWorkItem")
+                    .subscribe(dojo.hitch(this, function (workItem) { this._workItemDetails.showWorkItem(workItem); }));
             },
-            
-    });
+        });
+        
+        function endLoading() {
+            var loadingOverlay = dom.byId("loadingOverlay");
+            dojo.fadeOut({
+                node: loadingOverlay,
+                onEnd: function (node) {
+                    domStyle.set(node, { "display": "none" });
+                }
+            }).play();
+        }
 });

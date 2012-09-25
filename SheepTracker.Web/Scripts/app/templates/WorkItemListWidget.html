@@ -14,12 +14,14 @@
             
             <div data-dojo-type="dojox.mvc.Repeat" data-dojo-props="children: at('rel:', 'searchResults'), exprchar:'#'">
                 <!--<div data-dojo-type="dojox.mvc.Group" data-dojo-props="target: at('rel:', '#{this.index}')">-->
-                    <div class="selectable work-item">
-                        <span data-dojo-type="dojox.mvc.Output" data-dojo-props="value: at('rel:#{this.index}', 'Title')"></span>
+                    <div class="selectable work-item" data-dojo-type="dijit._WidgetBase" data-dojo-props="target: at('rel:', '#{this.index}')">
+                        <span data-dojo-type="dojox.mvc.Output" data-dojo-props="value: at('rel:', 'Title')"></span>
                         
-                        <div class="actions" data-dojo-type="dojox.mvc.Repeat" data-dojo-props="children: at('rel:#{this.index}', 'Actions'), exprchar: '%'">
-                            <span class="selectable-action" data-dojo-type="dojox.mvc.Output" data-dojo-props="value: at('rel:%{this.index}', 'Type')"></span>          
-                        </div>
+                        <ul class="action-list" style="opacity: 0" data-dojo-type="dojox.mvc.Repeat" data-dojo-props="children: at('rel:', 'Actions'), exprchar: '%'">
+                            <li>
+                                <span data-dojo-type="dojox.mvc.Output" data-dojo-props="value: at('rel:%{this.index}', 'Type')"></span>              
+                            </li>
+                        </ul>
                     </div>    
                 <!--</div>-->
             </div> 
