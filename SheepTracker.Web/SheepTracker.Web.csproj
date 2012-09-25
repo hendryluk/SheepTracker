@@ -9152,8 +9152,9 @@
     <Content Include="Scripts\dojox\analytics\logger\dojoxAnalytics.php" />
     <Content Include="Scripts\bootstrap\package.json" />
     <Content Include="Content\themes\app\WorkItemList.less" />
-    <Content Include="Content\themes\app\variables.less" />
+    <Content Include="Content\themes\variables.less" />
     <Content Include="Content\themes\app\app.less" />
+    <Content Include="Content\themes\elements.less" />
     <None Include="Scripts\jquery-1.6.2-vsdoc.js" />
     <Content Include="Scripts\dojo\tests\touch.js" />
     <Content Include="Scripts\dojo\tests\uacss.js" />

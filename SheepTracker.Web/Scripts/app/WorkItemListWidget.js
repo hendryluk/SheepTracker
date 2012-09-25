@@ -33,12 +33,10 @@
                 initKeyboardNavigation(this);
             },
             select: function (node) {
-                dojo.query(".selected").removeClass("selected")
-                    .children(".action-list").fadeOut().play();
-
+                dojo.query(".selected").removeClass("selected");
+                    
                 dojo.addClass(node, "selected");
-                dojo.query(".action-list", node).fadeIn().play();
-
+                
                 var workItem=null;
                 if(dojo.hasClass(node, "work-item"))
                     workItem = dijit.byNode(node).target;

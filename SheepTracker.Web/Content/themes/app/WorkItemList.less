@@ -1,4 +1,4 @@
-@import "variables.less";
+@import "../variables.less";
 
 .WorkItemList .searching input {
     background: @url-loading-animation  no-repeat right center;
@@ -10,6 +10,15 @@
 
 .WorkItemList .selectable.selected {
 	background-color: gray;
+}
+
+.WorkItemList .selectable ul.action-list{
+	opacity: 0;
+	.transition(opacity);
+}
+
+.WorkItemList .selectable.selected ul.action-list{
+	opacity: 1;
 }
 
 .WorkItemList ul.action-list{

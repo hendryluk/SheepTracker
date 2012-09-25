@@ -5,8 +5,6 @@
                data-dojo-attach-point="txSearch"
                data-dojo-props="value: at('rel:', 'searchTerms'), intermediateChanges:true" />
         
-        
-
         <div class="searchResultsPanel" data-dojo-attach-point="searchResultsPanel">
             <div class="selectable" data-dojo-type="dojox.mvc.Output" data-dojo-props="value: at(this.model, 'searchTerms'), exprchar:'#'">
                 + Create Task: #{this.value}
@@ -17,7 +15,7 @@
                     <div class="selectable work-item" data-dojo-type="dijit._WidgetBase" data-dojo-props="target: at('rel:', '#{this.index}')">
                         <span data-dojo-type="dojox.mvc.Output" data-dojo-props="value: at('rel:', 'Title')"></span>
                         
-                        <ul class="action-list" style="opacity: 0" data-dojo-type="dojox.mvc.Repeat" data-dojo-props="children: at('rel:', 'Actions'), exprchar: '%'">
+                        <ul class="action-list" data-dojo-type="dojox.mvc.Repeat" data-dojo-props="children: at('rel:', 'Actions'), exprchar: '%'">
                             <li>
                                 <span data-dojo-type="dojox.mvc.Output" data-dojo-props="value: at('rel:%{this.index}', 'Type')"></span>              
                             </li>
