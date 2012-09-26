@@ -1,4 +1,4 @@
-﻿define(['dojo/_base/declare', 'dojo/dom-style',
+﻿define(['dojo/_base/declare', 'dojo/dom-style', 'dojo/dom-class',
 
         'dijit/_WidgetBase', 'dijit/_TemplatedMixin', 'dijit/_WidgetsInTemplateMixin', 'dojo/text!./templates/WorkItemListWidget.html',
         'dojox/mvc', 'dojox/rpc/Rest', 'dojorx',
@@ -10,7 +10,7 @@
         'dojox/mvc/Output',
         'dojox/mvc/WidgetList',
         './WorkItemListItemWidget'],
-    function (declare, domStyle,
+    function (declare, domStyle, domClass,
         _WidgetBase, _TemplatedMixin, _WidgetsInTemplateMixin, template,
         mvc, Rest, rx) {
         
@@ -19,8 +19,8 @@
             templateString: template,
             
             // Attach points
-            txSearch: null, 
-            searchResultsPanel: null,
+            _txSearch: null, 
+            _createNewTask: null,
             
             searchTerms: "",
             searchResults: [],
@@ -72,7 +72,7 @@
             }
             
             function selectRight(evt) {
-                if (self.txSearch.textbox.selectionEnd < self.txSearch.value.length)
+                if (self._txSearch.textbox.selectionEnd < self.txSearch.value.length)
                     return;
 
                 evt.preventDefault();
@@ -101,11 +101,9 @@
             var searchTermsObserved = rx.selectProperty(self.model, 'searchTerms');
 
             function search(searchText) {
-                self.model.set({ workItems: [] });
-                
-                dojo.addClass(self.searchResultsPanel, "searching");
+                dojo.addClass(self.domNode, "searching");
                 var onCompleted = function () {
-                    dojo.removeClass(self.searchResultsPanel, "searching");
+                    dojo.removeClass(self.domNode, "searching");
                 };
 
                 return searchRest({ q: searchText, pageSize: 10, pageIndex: 0 })
@@ -138,13 +136,12 @@
                 .switchLatest()
                 .subscribe(function (data) {
                     self.model.set({ workItems: data });
-                    //setDefaultSelection();
                 });
 
             rx.on(self.domNode, ".selectable-action:click").subscribe(function () { alert("aaaa"); });
 
             searchTermsObserved.subscribe(function (term) {
-                domStyle.set(self.searchResultsPanel, { display: (term.length > 0) ? "block" : "none" });
+                domClass.toggle(self._createNewTask.domNode, "hide", term.length == 0);
             });
         }
 
