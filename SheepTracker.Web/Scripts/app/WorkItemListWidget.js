@@ -73,7 +73,7 @@
             }
             
             function selectRight(evt) {
-                if (self._txSearch.textbox.selectionEnd < self.txSearch.value.length)
+                if (self._txSearch.textbox.selectionEnd < self._txSearch.value.length)
                     return;
 
                 evt.preventDefault();
