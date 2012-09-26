@@ -8,8 +8,7 @@
         'dojox/mvc/Group',
         'dijit/form/TextBox',
         'dojox/mvc/Output',
-        'dojox/mvc/WidgetList',
-        './WorkItemListItemWidget'],
+        'dojox/mvc/WidgetList'],
     function (declare, domStyle, domClass,
         _WidgetBase, _TemplatedMixin, _WidgetsInTemplateMixin, template,
         mvc, Rest, rx) {
@@ -46,7 +45,9 @@
                 
                 this.onSelectedWorkItem(workItem);
             },
-            onSelectedWorkItem: function (workItem) { /* event */ }
+            
+            // EVENTS
+            onSelectedWorkItem: function (workItem) { } 
         });
 
         
@@ -98,8 +99,7 @@
         
         function initSearch(self) {
             var searchRest = new Rest(getUrl("/api/WorkItems"), true);
-            var searchTermsObserved = rx.selectProperty(self.model, 'searchTerms');
-
+            
             function search(searchText) {
                 dojo.addClass(self.domNode, "searching");
                 var onCompleted = function () {
@@ -128,21 +128,22 @@
             rx.watch(self.model, "workItems")
                 .subscribe(setDefaultSelection);
             
+            var searchTermsObserved = rx.selectProperty(self.model, 'searchTerms');
+            searchTermsObserved.subscribe(function (term) {
+                domClass.toggle(self._createNewTask.domNode, "hide", term.length == 0);
+            });
+            
             searchTermsObserved
-                .throttle(300)
+                .throttle(350)
                 .distinctUntilChanged()
-                .where(function (q) { return q.length > 0; })
                 .select(search)
                 .switchLatest()
                 .subscribe(function (data) {
                     self.model.set({ workItems: data });
                 });
 
+            rx.on(self.domNode, ".selectable:click").subscribe(function (e) { self.select(e.target); });
             rx.on(self.domNode, ".selectable-action:click").subscribe(function () { alert("aaaa"); });
-
-            searchTermsObserved.subscribe(function (term) {
-                domClass.toggle(self._createNewTask.domNode, "hide", term.length == 0);
-            });
         }
 
         return workItemListWidget;
