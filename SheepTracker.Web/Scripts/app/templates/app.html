@@ -1,66 +1,46 @@
 ﻿<div>
-    <div data-dojo-attach-point="mainContent">
-        <header>
-            <div class="content-wrapper">
-                <div class="float-left">
-                    <p class="site-title">
-                        <a href="~/">SheepTracker</a></p>
-                </div>
+    <!--<div id="appLayout" 
+             data-dojo-type="dijit.layout.BorderContainer"
+             data-dojo-props="design: 'headline'">
+            <div
+                data-dojo-type="dijit.layout.ContentPane"
+                data-dojo-props="region: 'right', splitter: true">
+                <section data-dojo-type="app.WorkItemDetailsWidget" data-dojo-attach-point="_workItemDetails">ERROR WorkItemDetails</section>
             </div>
-        </header>
-
-        <div id="body">
-            <section class="featured">
-                <div class="content-wrapper">
-                    <hgroup class="title">
-                        <h1>
-                            Welcome to ASP.NET Web API!
-                        </h1>
-                        <h2>
-                            Modify the code in this template to jump-start your ASP.NET Web API development.</h2>
-                    </hgroup>
-                    <section data-dojo-type="app.WorkItemListWidget" data-dojo-attach-point="_workItemList">ERROR WorkItemDetails</section>
-                    <section data-dojo-type="app.WorkItemDetailsWidget" data-dojo-attach-point="_workItemDetails">ERROR WorkItemDetails</section>
-                    
-                    <p>
-                        ASP.NET Web API allows you to expose your applications, data and services to the
-                        web directly over HTTP.
-                    </p>
-                    <p>
-                        To learn more about ASP.NET Web API visit <a href="http://go.microsoft.com/fwlink/?LinkID=238195"
-                                                                     title="ASP.NET Web API Website">http://asp.net/web-api</a>. The page features
-                        <mark>videos, tutorials, and samples</mark> to help you get the
-                        most from ASP.NET Web API. If you have any questions about ASP.NET Web API, visit
-                        <a href="http://go.microsoft.com/fwlink/?LinkID=238196" title="ASP.NET Web API Forum">
-                            our forums</a>.
-                    </p>
-                </div>
-            </section>
-            <section class="content-wrapper main-content clear-fix">
-                <h3>
-                    We suggest the following steps:</h3>
-                <ol class="round">
-                    <li class="one">
-                        <h5>
-                            Getting Started
-                        </h5>
-                        ASP.NET Web API is a framework that makes it easy to build HTTP services that reach
-                        a broad range of clients, including browsers and mobile devices. ASP.NET Web API
-                        is an ideal platform for building RESTful applications on the .NET Framework. <a href="http://go.microsoft.com/fwlink/?LinkId=245160">Learn
-                                                                                                          more</a> </li>
-                    <li class="two">
-                        <h5>
-                            Add NuGet packages and jump start your coding</h5>
-                        NuGet makes it easy to install and update free libraries and tools. <a href="http://go.microsoft.com/fwlink/?LinkId=245161">
-                                                                                                Learn more</a></li>
-                    <li class="three">
-                        <h5>
-                            Find Web Hosting</h5>
-                        You can easily find a web hosting company that offers the right mix of features
-                        and price for your applications. <a href="http://go.microsoft.com/fwlink/?LinkId=245164">Learn
-                                                             more</a></li>
-                </ol>
-            </section>
+                
+            <div class="leftPane"
+                 data-dojo-type="dijit.layout.ContentPane"
+                 data-dojo-props="region: 'left', splitter: true">
+                <section data-dojo-type="app.WorkItemListWidget" data-dojo-attach-point="_workItemList">ERROR WorkItemDetails</section>        
+            </div>
+        </div>-->
+    
+    <div
+            id="appLayout" class="demoLayout"
+            data-dojo-type="dijit.layout.BorderContainer"
+            data-dojo-props="design: 'headline'">
+        <div
+                class="centerPanel"
+                data-dojo-type="dijit.layout.ContentPane"
+                data-dojo-props="region: 'center'">
+            <div>
+                <h4>Group 1 Content</h4>
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+            </div>
+            <div>
+                <h4>Group 2 Content</h4>
+            </div>
+            <div>
+                <h4>Group 3 Content</h4>
+            </div>
         </div>
+        <div
+                class="edgePanel"
+                data-dojo-type="dijit.layout.ContentPane"
+                data-dojo-props="region: 'top'">Header content (top)</div>
+        <div
+            id="leftCol" class="edgePanel"
+            data-dojo-type="dijit.layout.ContentPane"
+            data-dojo-props="region: 'left', splitter: true">Sidebar content (left)</div>
     </div>
 </div>

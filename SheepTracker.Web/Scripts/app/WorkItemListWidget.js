@@ -37,11 +37,12 @@
             select: function (node) {
                 dojo.query(".selected").removeClass("selected");
                     
-                dojo.addClass(node, "selected");
-                
-                var workItem=null;
-                if(dojo.hasClass(node, "work-item"))
-                    workItem = dijit.byNode(node).target;
+                var workItem = null;
+                if (node) {
+                    dojo.addClass(node, "selected");
+                    if (dojo.hasClass(node, "work-item"))
+                        workItem = dijit.byNode(node).target;
+                }
                 
                 this.onSelectedWorkItem(workItem);
             },
@@ -53,7 +54,7 @@
         
         function initKeyboardNavigation(self) {
             function selectDown() {
-                var selectables = dojo.query(".selectable", self.domNode);
+                var selectables = dojo.query(".selectable:not(.hide)", self.domNode);
                 var selected = selectables.filter(".selected")[0];
                 var selectedIndex = selectables.indexOf(selected);
 
@@ -63,7 +64,7 @@
             }
 
             function selectUp() {
-                var selectables = dojo.query(".selectable", self.domNode);
+                var selectables = dojo.query(".selectable:not(.hide)", self.domNode);
                 var selected = selectables.filter(".selected")[0];
                 var selectedIndex = selectables.indexOf(selected);
 
@@ -116,11 +117,9 @@
             }
             
             function setDefaultSelection() {
-                dojo.query(".selected", self.domNode).removeClass("selected");
-
                 var node = dojo.query(".selectable.work-item:first-of-type", self.domNode);
                 if (!node.length)
-                    node = dojo.query(".selectable:first-of-type", self.domNode);
+                    node = dojo.query(".selectable:not(.hide):first-of-type", self.domNode);
 
                 self.select(node[0]);
             }

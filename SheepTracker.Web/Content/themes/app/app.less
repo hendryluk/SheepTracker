@@ -1,7 +1,12 @@
 ﻿@import "../variables.less";
+@import "../../../Scripts/dijit/themes/claro/document.css";
 
 #loadingOverlay{
 	background:  #fff @url-loading-animation no-repeat 10px 23px;
+}
+
+.claro {
+	font-size: 0.9em;
 }
 
 .pageOverlay{
@@ -16,4 +21,43 @@
 
 .hide {
 	display: none;
+}
+
+/* site title
+----------------------------------------------------------*/
+.site-title {
+    color: #c8c8c8;
+    font-family: Rockwell, Consolas, "Courier New", Courier, monospace;
+    font-size: 2.3em;
+    margin: 20px 0;
+}
+
+.site-title a, .site-title a:hover, .site-title a:active {
+    background: none;
+    color: #c8c8c8;
+    outline: none;
+    text-decoration: none;
+}
+
+    html, body {
+    height: 100%;
+    margin: 0;
+    overflow: hidden;
+    padding: 0;
+}
+ 
+#appLayout {
+    height: 100%;
+}
+#leftCol {
+    width: 14em;
+}
+ 
+.claro .demoLayout .edgePanel {
+    background-color: #d0e9fc;
+}
+ 
+#viewsChart {
+    width: 550px;
+    height: 550px;
 }

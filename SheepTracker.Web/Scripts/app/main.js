@@ -21,7 +21,7 @@ define(['dojo/_base/declare', 'dojo/dom', 'dojo/dom-style',
         'dijit/_WidgetBase', 'dijit/_TemplatedMixin', 'dijit/_WidgetsInTemplateMixin', 'dojo/text!./templates/app.html',
         'dojorx',
     
-        './WorkItemListWidget', './WorkItemDetailsWidget'],
+        './WorkItemListWidget', './WorkItemDetailsWidget', 'dijit/Layout/BorderContainer', 'dijit/layout/ContentPane'],
     function (declare, dom, domStyle,
         _WidgetBase, _TemplatedMixin, _WidgetsInTemplateMixin, template,
         rx) {
@@ -37,8 +37,8 @@ define(['dojo/_base/declare', 'dojo/dom', 'dojo/dom-style',
                 this.inherited(arguments);
                 endLoading(this);
 
-                rx.on(this._workItemList, "onSelectedWorkItem")
-                    .subscribe(dojo.hitch(this, function (workItem) { this._workItemDetails.showWorkItem(workItem); }));
+                //rx.on(this._workItemList, "onSelectedWorkItem")
+                //    .subscribe(dojo.hitch(this, function (workItem) { this._workItemDetails.showWorkItem(workItem); }));
             },
         });
         

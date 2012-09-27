@@ -6,7 +6,7 @@
     <title>@ViewBag.Title</title>
     
     @Scripts.Render("~/bundles/modernizr")
-    @Styles.Render("~/Content/themes/base/css", "~/Content/css")
+    @Styles.Render("~/Content/themes/base/css")
     
     <script>
         function getUrl(path) {
@@ -27,6 +27,10 @@
         <div id="loadingOverlay" class="pageOverlay">
             <div class="loadingMessage">Loading...</div>
         </div>
+        
+        <h1 class="site-title">
+            <a href="~/">SheepTracker</a>
+        </h1>
 
         <section data-dojo-type="app.main"></section>
         
