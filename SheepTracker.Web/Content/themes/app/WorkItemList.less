@@ -1,7 +1,7 @@
 @import "../variables.less";
 
 .WorkItemList {
-	width: 400px;
+	width: 100%;
 }
 
 .WorkItemList .txSearch {
@@ -22,6 +22,7 @@
 
 .WorkItemList .selectable {
 	background-color: @unselected-background-color;
+	color: @unselected-text-color;
 	cursor: pointer;
 }
 
@@ -32,6 +33,7 @@
 
 .WorkItemList .selectable.selected {
 	background-color: @selected-background-color;
+	color: @selected-text-color;
 }
 
 .WorkItemList .selectable.selected ul.action-list{
@@ -40,6 +42,7 @@
 
 .WorkItemList .selectable:hover {
 	background-color: @hovered-background-color;
+	color: @hovered-text-color;
 }
 
 .WorkItemList .selectable:hover ul.action-list {
@@ -47,9 +50,15 @@
 }
 
 .WorkItemList ul.action-list{
+	margin: 0;
 	float: right;
 }
 
 .WorkItemList ul.action-list li{
 	display: inline;
+	background-color: red;
+}
+
+.WorkItemList ul.action-list li.selected{
+	background-color: yellow;
 }

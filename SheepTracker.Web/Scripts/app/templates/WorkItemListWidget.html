@@ -18,9 +18,7 @@
                         <span data-dojo-type="dojox.mvc.Output" data-dojo-props="value: at('rel:', 'Title')"></span>
                         
                         <ul class="action-list" data-dojo-type="dojox.mvc.Repeat" data-dojo-props="children: at('rel:', 'Actions'), exprchar: '%'">
-                            <li>
-                                <span data-dojo-type="dojox.mvc.Output" data-dojo-props="value: at('rel:%{this.index}', 'Type')"></span>              
-                            </li>
+                                <li data-dojo-type="dojox.mvc.Output" data-dojo-props="value: at('rel:%{this.index}', 'Type')"></li>
                         </ul>
                     </div>    
                 <!--</div>-->

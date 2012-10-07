@@ -42,6 +42,7 @@
                     dojo.addClass(node, "selected");
                     if (dojo.hasClass(node, "work-item"))
                         workItem = dijit.byNode(node).target;
+                    dojo.query(".action-list li:first-of-type", node).addClass("selected");
                 }
                 
                 this.onSelectedWorkItem(workItem);
@@ -55,29 +56,58 @@
         function initKeyboardNavigation(self) {
             function selectDown() {
                 var selectables = dojo.query(".selectable:not(.hide)", self.domNode);
-                var selected = selectables.filter(".selected")[0];
-                var selectedIndex = selectables.indexOf(selected);
 
-                if (selectedIndex < selectables.length - 1) {
-                    self.select(selectables[selectedIndex + 1]);
+                if (selectables.length) {
+                    var selected = selectables.filter(".selected")[0];
+                    var selectedIndex = selectables.indexOf(selected);
+
+                    if (selectedIndex < selectables.length - 1) {
+                        self.select(selectables[selectedIndex + 1]);
+                    }
                 }
             }
 
             function selectUp() {
                 var selectables = dojo.query(".selectable:not(.hide)", self.domNode);
-                var selected = selectables.filter(".selected")[0];
-                var selectedIndex = selectables.indexOf(selected);
 
-                if (selectedIndex > 0) {
-                    self.select(selectables[selectedIndex - 1]);
+                if (selectables.length) {
+                    var selected = selectables.filter(".selected")[0];
+                    var selectedIndex = selectables.indexOf(selected);
+
+                    if (selectedIndex > 0) {
+                        self.select(selectables[selectedIndex - 1]);
+                    }
                 }
             }
-            
+
             function selectRight(evt) {
                 if (self._txSearch.textbox.selectionEnd < self._txSearch.value.length)
                     return;
 
                 evt.preventDefault();
+                var actions = dojo.query(".work-item.selected .action-list li");
+                
+                var selected = actions.filter(".selected");
+                var index = selected.length ? actions.indexOf(selected[0]) + 1 : 0;
+
+                if (index < actions.length) {
+                    actions.removeClass("selected");
+                    dojo.addClass(actions[index], "selected");
+                }
+            }
+
+            function selectLeft(evt) {
+                var actions = dojo.query(".work-item.selected .action-list li");
+                var selected = actions.filter(".selected");
+                var index = selected.length ? actions.indexOf(selected[0]) - 1 : 0;
+
+                if (index >= 0 && index < actions.length) {
+                    evt.preventDefault();
+                    if (index < actions.length) {
+                        actions.removeClass("selected");
+                        dojo.addClass(actions[index], "selected");
+                    }
+                }
             }
 
             rx.on(window, "keydown")
@@ -93,6 +123,9 @@
                             break;
                         case dojo.keys.RIGHT_ARROW:
                             selectRight(evt);
+                            break;
+                        case dojo.keys.LEFT_ARROW:
+                            selectLeft(evt);
                             break;
                     }
                 });
