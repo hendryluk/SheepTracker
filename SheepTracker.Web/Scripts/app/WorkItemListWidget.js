@@ -1,7 +1,7 @@
 ﻿define(['dojo/_base/declare', 'dojo/dom-style', 'dojo/dom-class',
 
         'dijit/_WidgetBase', 'dijit/_TemplatedMixin', 'dijit/_WidgetsInTemplateMixin', 'dojo/text!./templates/WorkItemListWidget.html',
-        'dojox/mvc', 'dojox/rpc/Rest', 'dojorx',
+        'dojox/mvc', 'dojox/rpc/Rest', 'dojorx', 'dijit/focus',
     
         'dojo/NodeList-manipulate', 'dojo/NodeList-fx', 'dojo/NodeList-traverse',
         'dojox/mvc/Repeat',
@@ -11,7 +11,7 @@
         'dojox/mvc/WidgetList'],
     function (declare, domStyle, domClass,
         _WidgetBase, _TemplatedMixin, _WidgetsInTemplateMixin, template,
-        mvc, Rest, rx) {
+        mvc, Rest, rx, focus) {
         
         var workItemListWidget = declare("app.WorkItemListWidget", [_WidgetBase, _TemplatedMixin, _WidgetsInTemplateMixin], {
             baseClass: "WorkItemList",
@@ -42,7 +42,6 @@
                     dojo.addClass(node, "selected");
                     if (dojo.hasClass(node, "work-item"))
                         workItem = dijit.byNode(node).target;
-                    dojo.query(".action-list li:first-of-type", node).addClass("selected");
                 }
                 
                 this.onSelectedWorkItem(workItem);
@@ -93,22 +92,32 @@
                 if (index < actions.length) {
                     actions.removeClass("selected");
                     dojo.addClass(actions[index], "selected");
+                    self._txSearch.textbox.blur();
                 }
             }
 
             function selectLeft(evt) {
                 var actions = dojo.query(".work-item.selected .action-list li");
                 var selected = actions.filter(".selected");
-                var index = selected.length ? actions.indexOf(selected[0]) - 1 : 0;
 
-                if (index >= 0 && index < actions.length) {
+                if (selected.length) {
                     evt.preventDefault();
-                    if (index < actions.length) {
-                        actions.removeClass("selected");
+                    actions.removeClass("selected");
+
+                    var index = actions.indexOf(selected[0]) - 1;
+                    if (index >= 0) {
                         dojo.addClass(actions[index], "selected");
+                    }
+                    else {
+                        focus.focus(self._txSearch.textbox);
                     }
                 }
             }
+
+            rx.on(self._txSearch.textbox, "focus")
+                .subscribe(function (ev) {
+                    dojo.query(".action-list li").removeClass("selected");
+                });
 
             rx.on(window, "keydown")
                 .subscribe(function (evt) {
@@ -127,6 +136,8 @@
                         case dojo.keys.LEFT_ARROW:
                             selectLeft(evt);
                             break;
+                        default:
+                            focus.focus(self._txSearch.textbox);
                     }
                 });
         }
