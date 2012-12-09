@@ -21,7 +21,7 @@ namespace Cqrs.Messaging.Handling
     public interface IEventHandler<T> : IEventHandler
         where T : IEvent
     {
-        void Handle(T @event);
+        void Handle(T ev);
     }
 
     public interface IEnvelopedEventHandler<T> : IEventHandler
