@@ -9601,6 +9601,16 @@
   <ItemGroup>
     <Content Include="packages.config" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Cqrs\Cqrs.csproj">
+      <Project>{8971B0E6-FA30-4227-A53B-513BBA8D76CF}</Project>
+      <Name>Cqrs</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\TimeTracking\TimeTracking.csproj">
+      <Project>{DDC12488-A8EA-469C-A4D9-6CA63B2884E0}</Project>
+      <Name>TimeTracking %28TimeTracking\TimeTracking%29</Name>
+    </ProjectReference>
+  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>

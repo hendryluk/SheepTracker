@@ -21,7 +21,8 @@
             _txSearch: null, 
             _createNewTask: null,
             
-            searchTerms: "",
+            workItemRest: new Rest(getUrl("/api/WorkItems"), true),
+            
             searchResults: [],
             constructor: function () {
                 this.model = mvc.getStateful({
@@ -47,8 +48,21 @@
                 this.onSelectedWorkItem(workItem);
             },
             
+            executeAction: function (node) {
+                if (node == this._createNewTask.domNode) {
+                    var name = this.model.searchTerms;
+                    this.workItemRest.post({ name: name })
+                        .then(dojo.hitch(this, function () {
+                            dojo.addClass(node, "hide");
+                            this.select(null);
+                            this.onItemCreated(name);
+                        }));
+                }
+            },
+            
             // EVENTS
-            onSelectedWorkItem: function (workItem) { } 
+            onSelectedWorkItem: function (workItem) { },
+            onItemCreated: function(name){}
         });
 
         
@@ -84,7 +98,7 @@
                     return;
 
                 evt.preventDefault();
-                var actions = dojo.query(".work-item.selected .action-list li");
+                var actions = dojo.query(".work-item.selected .action-list li", self.domNode);
                 
                 var selected = actions.filter(".selected");
                 var index = selected.length ? actions.indexOf(selected[0]) + 1 : 0;
@@ -97,7 +111,7 @@
             }
 
             function selectLeft(evt) {
-                var actions = dojo.query(".work-item.selected .action-list li");
+                var actions = dojo.query(".work-item.selected .action-list li", self.domNode);
                 var selected = actions.filter(".selected");
 
                 if (selected.length) {
@@ -115,8 +129,8 @@
             }
 
             rx.on(self._txSearch.textbox, "focus")
-                .subscribe(function (ev) {
-                    dojo.query(".action-list li").removeClass("selected");
+                .subscribe(function () {
+                    dojo.query(".action-list li", self.domNode).removeClass("selected");
                 });
 
             rx.on(window, "keydown")
@@ -136,6 +150,12 @@
                         case dojo.keys.LEFT_ARROW:
                             selectLeft(evt);
                             break;
+                        case dojo.keys.ENTER:
+                            self.executeAction(dojo.query(".selectable:not(.hide).selected", self.domNode)[0]);
+                            break;
+                        case dojo.keys.ESCAPE:
+                            self.model.set({ searchTerms: "" });
+                            break;
                         default:
                             focus.focus(self._txSearch.textbox);
                     }
@@ -143,15 +163,13 @@
         }
         
         function initSearch(self) {
-            var searchRest = new Rest(getUrl("/api/WorkItems"), true);
-            
             function search(searchText) {
                 dojo.addClass(self.domNode, "searching");
                 var onCompleted = function () {
                     dojo.removeClass(self.domNode, "searching");
                 };
 
-                return searchRest({ q: searchText, pageSize: 10, pageIndex: 0 })
+                return self.workItemRest({ q: searchText, pageSize: 10, pageIndex: 0 })
                     .asObservable()
                     .doAction({
                         onNext: function () { },
@@ -163,27 +181,29 @@
             function setDefaultSelection() {
                 var node = dojo.query(".selectable.work-item:first-of-type", self.domNode);
                 if (!node.length)
-                    node = dojo.query(".selectable:not(.hide):first-of-type", self.domNode);
+                    node = dojo.query(".selectable:first-of-type", self.domNode);
 
                 self.select(node[0]);
             }
 
-            rx.watch(self.model, "workItems")
-                .subscribe(setDefaultSelection);
-            
             var searchTermsObserved = rx.selectProperty(self.model, 'searchTerms');
             searchTermsObserved.subscribe(function (term) {
                 domClass.toggle(self._createNewTask.domNode, "hide", term.length == 0);
             });
-            
-            searchTermsObserved
-                .throttle(350)
-                .distinctUntilChanged()
-                .select(search)
-                .switchLatest()
-                .subscribe(function (data) {
-                    self.model.set({ workItems: data });
-                });
+
+            rx.Observable.merge(null,
+                searchTermsObserved
+                    .throttle(600)
+                    .distinctUntilChanged(),
+                rx.on(self, "onItemCreated")
+            ).select(search)
+             .switchLatest()
+             .subscribe(function (data) {
+                 self.model.set({ workItems: data });
+             });
+
+            rx.watch(self.model, "workItems")
+                .subscribe(setDefaultSelection);
 
             rx.on(self.domNode, ".selectable:click").subscribe(function (e) { self.select(e.target); });
             rx.on(self.domNode, ".selectable-action:click").subscribe(function () { alert("aaaa"); });
