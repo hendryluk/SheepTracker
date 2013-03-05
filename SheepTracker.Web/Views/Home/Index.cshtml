@@ -1,39 +1,15 @@
 ﻿<!DOCTYPE html>
-<html>
+<html ng-app>
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width" />
     <title>@ViewBag.Title</title>
     
-    @Scripts.Render("~/bundles/modernizr")
-    @Styles.Render("~/Content/themes/base/css")
-    
-    <script>
-        function getUrl(path) {
-            return "@Href("~")" + path;
-        };
-        
-        var dojoConfig = {
-            async: 1,
-            tlmSiblingOfDojo: 0,
-            isDebug: 1,
-            baseUrl: "@Href("~/Scripts/")"
-        };
-    </script>
-
-    @Styles.Render("~/Content/themes/app/css")
 </head>
-    <body class="claro">
-        <div id="loadingOverlay" class="pageOverlay">
-            <div class="loadingMessage">Loading...</div>
-        </div>
+    <body>
         
-        <h1 class="site-title">
-            <a href="~/">SheepTracker</a>
-        </h1>
+        
 
-        <section data-dojo-type="app.main" id="appMain"></section>
-        
         <script src="~/Scripts/rx.min.js"></script>
         <script src="~/Scripts/rx.time.min.js"></script>
         <script src="~/Scripts/dojo/dojo.js"></script>
