@@ -198,6 +198,7 @@
       <Link>Raven.Studio.xap</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Content\Styles\angular-ui.css" />
     <Content Include="Content\jasmine\jasmine.css" />
     <Content Include="Content\jasmine\jasmine_favicon.png" />
     <Content Include="Content\themes\base\images\ui-bg_flat_0_aaaaaa_40x100.png" />
@@ -230,8 +231,10 @@
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="RxJS-redist.txt" />
+    <Content Include="Scripts\angular-ui-ieshiv.js" />
+    <Content Include="Scripts\angular-ui.js" />
     <Content Include="Scripts\angular.js" />
-    <Content Include="Scripts\app\WorkItemListController.js" />
+    <Content Include="Scripts\app\controllers\WorkItemListController.js" />
     <Content Include="Scripts\app_bakDojo\effects\_WidgetListFadeInMixin.js" />
     <Content Include="Scripts\app_bakDojo\templates\WorkItemDetailsWidget.html" />
     <Content Include="Scripts\app_bakDojo\WorkItemDetailsWidget.js" />
@@ -327,7 +330,7 @@
     <Content Include="Web.Release.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
-    <Content Include="Content\Site.css" />
+    <Content Include="Content\Styles\Site.css" />
     <Content Include="Images\accent.png" />
     <Content Include="Images\aspNetHome.png" />
     <Content Include="Images\bullet.png" />
@@ -357,7 +360,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Content\Styles\" />
     <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>

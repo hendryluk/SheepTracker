@@ -6,10 +6,23 @@
         <title>@ViewBag.Title</title>
     
         @Scripts.Render("~/Scripts/angular.js")
+        @Scripts.Render("~/Scripts/angular-ui.js")
         @Scripts.Render("~/bundles/app")
+        @Styles.Render("~/Content/Styles/angular-ui.css")
 
         <script src="~/Scripts/rx.min.js"></script>
         <script src="~/Scripts/rx.time.min.js"></script>
+        
+        <!--[if lte IE 8]>
+            <script>
+            // The ieshiv takes care of our ui.directives, bootstrap module directives and 
+            // AngularJS's ng-view, ng-include, ng-pluralize and ng-switch directives.
+            // However, IF you have custom directives (yours or someone else's) then
+            // enumerate the list of tags in window.myCustomTags
+ 
+            </script>
+            <script src="build/angular-ui-ieshiv.js"></script>
+        <![endif]-->
     </head>
 
     <body>
